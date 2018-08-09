@@ -68,7 +68,7 @@ client.on('message', msg => {
 	var ls = spawn(procUsrIn[0], procUsrIn.slice(1));
 	ls.stdout.on('data', data => {
 		console.log(`stdout: ${data}`);
-		msg.reply(`stdout: ${data}`);
+		msg.reply(`${data}`);
 	});
 	ls.stderr.on('data', data => {
 		console.log(`stderr: ${data}`);
