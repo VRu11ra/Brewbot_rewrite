@@ -1,0 +1,11 @@
+HELP DOC
+
+Use ^ as a prefix for pre-defined commands
+Use , as a prefix for direct command line access
+
+Commands that are currently under ^
+^help: prints out this text (not gonna abbreviate this 'cause people are gonna get lost)
+^cr: curses a single curse (CuRse - ^curse also works)
+^tg <some query>: returns from wolfram alpha the result of your query (TunGsten - ^tungsten also works)
+^rr <User 1, User 2, User 3>: plays russian roulette with users- randomly bans someone (Russian Roulette) //in development
+^sz: view sanitization options. To change these, contact the dev.

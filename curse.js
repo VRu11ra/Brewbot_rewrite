@@ -1,2 +1,2 @@
-var cock = require('badwords/Array');
+var cock = require('badwords/array');
 console.log(cock[parseInt(cock.length*Math.random())]);
