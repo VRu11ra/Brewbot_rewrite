@@ -8,6 +8,8 @@ var timeout = 5000;
 var aggrtimeout = 10000;
 var self = 'BrewBot';
 
+console.log(process.argv[3]); //TODO debug
+
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -27,7 +29,7 @@ client.on('message', msg => {
 		sanitize(msg, aggrtimeout);
 		msg.channel.send("```Aggressive sanitization is enabled. \nI will delete the above bot message in "+aggrtimeout/1000+" seconds.\nThis can be disabled by the dev in settings if this is a problem.```");
 	}
-	if(msg.author.username === self && !(msg.content.startsWith("**TIMED MESSAGE**"))){  //TODO laying framework for reaction based stuff
+	if(msg.author.username === self && !(msg.content.startsWith("**UNIQUE**"))){  //TODO laying framework for reaction based stuff
 		sanitize(msg, timeout);
 	}
   }
@@ -47,7 +49,7 @@ client.on('message', msg => {
 	}
 
 	var procUsrIn = msg.content.substring(1).split(" ");
-	var response = (raw) => {
+	var response = (raw, msg) => {
 		console.log(raw[0]);
 		switch (raw[0]){
 			case 'cr':
@@ -58,6 +60,9 @@ client.on('message', msg => {
 				return "tungsten " + raw.slice(1).join(" ");
 			case 'help':
 				return "cat help.txt"
+			case 'mention':
+			case 'mn':
+				return "echo the following users have been mentioned in this message: "+ msg.mentions.users.array();
 			case 'rr':
 				return "echo this command is currently under development, check back later or pester the dev";
 			case 'sz':
@@ -66,8 +71,8 @@ client.on('message', msg => {
 				return "echo This command is not defined, check your spelling";
 		}
 	}
-	console.log(response(procUsrIn));
-	var format = response(procUsrIn).split(" ");
+//	console.log(response(procUsrIn));
+	var format = response(procUsrIn, msg).split(" ");
 	var ls = spawn(format[0], format.slice(1));
 	ls.stdout.on('data', data => {
 		console.log(`stdout: ${data}`);
