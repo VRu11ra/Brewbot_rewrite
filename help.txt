@@ -8,4 +8,5 @@ Commands that are currently under ^
 ^cr: curses a single curse (CuRse - ^curse also works)
 ^tg <some query>: returns from wolfram alpha the result of your query (TunGsten - ^tungsten also works)
 ^rr <User 1, User 2, User 3>: plays russian roulette with users- randomly bans someone (Russian Roulette) //in development
+^lb <User 1, User 2, User 3,...>: creates a lobby queue for the people mentioned, dismisses when all users acknolage (LoBby - ^lobby also works)
 ^sz: view sanitization options. To change these, contact the dev.
