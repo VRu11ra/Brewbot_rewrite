@@ -85,6 +85,12 @@ client.on('message', msg => {
 	      var response = (raw, msg) => {
 		        console.log(raw[0]);
 		        switch (raw[0]){
+            case 'profile':
+                var users = msg.mentions.users.array().forEach((a)=>{
+                    console.log(a+'< user, user id>'+a.id);
+                });
+                return 'echo '+users;
+            case 'mu':
             case 'music':
                 const ytdl = require('ytdl-core');
                 const streamOptions = { seek: 0, volume: 1 };
@@ -93,21 +99,18 @@ client.on('message', msg => {
                 //        console.log(msg.author.member.GuildMember.voiceChannel);
                 //        console.log(msg.author.lastMessage.member.GuildMember.voiceChannel);
                 //        var test = util.inspect(msg.author.lastMessage.member.voiceChannel);
-                console.log('yo');
-                var link = 'https://www.youtube.com/watch?v=TrRDqD-bpWY';
+//                var link = 'https://www.youtube.com/watch?v=TrRDqD-bpWY';
                 try{
                     voiceChannel.join().then(connection => {
-//                            const stream = ytdl(link, { filter : 'audioonly' });
-//                            broadcast.playStream(stream);
-//                            const dispatcher = connection.playBroadcast(broadcast);
-                        broadcast.playFile("./yas.mp4");
+                        const stream = ytdl(raw[1], { filter : 'audioonly' });
+                        broadcast.playStream(stream);
+                        //broadcast.playFile("./yas.mp4");
                         const dispatcher = connection.playBroadcast(broadcast);
-                        repl.start('> ').context.m = 'ayo';
                     }).catch(console.error);
                 }catch(e){
                     msg.channel.send('you\'re not in a channel you retard');
                 }
-                return "echo music!";
+                return "echo _SUCTION!_";
 			      case 'cr':
 			      case 'curse':
 				        return "node curse.js";
