@@ -21,6 +21,7 @@ console.log(process.argv[3]); //TODO debug
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    client.user.setPresence({game: {name: 'with my dev\'s heart'}, status: 'busy'});
 });
 
 client.on('message', msg => {
@@ -43,35 +44,6 @@ client.on('message', msg => {
 
     }
 
-//    //MUSIC PLAYER
-//    if(msg.content.startsWith('^music')){ //TODO set to if msg.content == '^music' or actually just prepend
-//        const ytdl = require('ytdl-core');
-//        const streamOptions = { seek: 0, volume: 1 };
-//        const broadcast = client.createVoiceBroadcast();
-//        const voiceChannel = msg.member.voiceChannel;
-////        console.log(msg.author.member.GuildMember.voiceChannel);
-//        //        console.log(msg.author.lastMessage.member.GuildMember.voiceChannel);
-////        var test = util.inspect(msg.author.lastMessage.member.voiceChannel);
-//        console.log('yo');
-//        var link = 'https://www.youtube.com/watch?v=TrRDqD-bpWY';
-//        try{
-//        voiceChannel.join()
-//            .then(connection => {
-//                const stream = ytdl(link, { filter : 'audioonly' });
-//                broadcast.playStream(stream);
-//                const dispatcher = connection.playBroadcast(broadcast);
-//            })
-//                .catch(console.error);
-//        }catch(e){
-//            msg.channel.send('you\'re not in a channel you retard');
-//        }
-//    }
-
-
-
-
-
-
 
 
     if (msg.content.startsWith('^')){
@@ -85,11 +57,11 @@ client.on('message', msg => {
 	      var response = (raw, msg) => {
 		        console.log(raw[0]);
 		        switch (raw[0]){
-            case 'profile':
-                var users = msg.mentions.users.array().forEach((a)=>{
-                    console.log(a+'< user, user id>'+a.id);
-                });
-                return 'echo '+users;
+            case 'dm':
+                var dm = msg.author.createDM().then((a)=>{
+                    a.send('hi! ;)');
+                }).catch(console.error);
+                return 'echo done!';
             case 'mu':
             case 'music':
                 const ytdl = require('ytdl-core');
@@ -132,7 +104,7 @@ client.on('message', msg => {
 			      default:
 				        return "echo This command is not defined, check your spelling";
 		        }
-	      }
+	      };
 
 	      var format = response(procUsrIn, msg).split(" ");
 	      console.log(response);
